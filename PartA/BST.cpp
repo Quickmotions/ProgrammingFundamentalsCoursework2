@@ -3,7 +3,9 @@
 using namespace std;
 
 string to_string_helper(Node *root);
-void insert(Node *&root, string name, string value);
+void insert(Node *&root, const string& name, const string& value);
+string search(Node *root, const string& search_name);
+
 
 BST::BST()
 {
@@ -14,7 +16,8 @@ BST::BST()
 // from the existing binary search tree.
 BST::BST(const BST &other)
 {
-   //TODO: Implement the copy constructor
+    this->root = nullptr;
+    //TODO: Implement the copy constructor
 }
 
 // Destructor for the BST class. frees all heap-allocated memory.
@@ -40,7 +43,7 @@ string to_string_helper(Node *root)
     }
 }
 
-void insert(Node *&root, string name, string value) {
+void insert(Node *&root, const string& name, const string& value) {
     if (root == nullptr) {
         root = new Node;
         root->name = name;
@@ -55,6 +58,34 @@ void insert(Node *&root, string name, string value) {
             insert(root->right, name, value);
         }
     }
+}
+
+string search(Node *root, const string& search_name){
+    string output;
+    if(root->name == search_name) {
+        output = root->value;
+    }
+    if(output.empty() && root->left != nullptr){
+        output = search(root->left, search_name);
+    }
+    if(output.empty() && root->right != nullptr){
+        output = search(root->right, search_name);
+    }
+    return output;
+}
+
+int count_nodes(Node *root){
+    int count = 0;
+    if (root != nullptr){
+        count++;
+    }
+    if (root->left != nullptr){
+        count += count_nodes(root->left);
+    }
+    if (root->right != nullptr){
+        count += count_nodes(root->right);
+    }
+    return count;
 }
 
 string BST::to_string() const
@@ -72,22 +103,21 @@ string BST::to_string() const
 // (value) into the correct position in the tree.
 void BST::insert_constant(string name, string value)
 {
-   //TODO: Implement the insert_constant method
-    insert((*&this->root), name, value);
+    insert(*&this->root, name, value);
 }
 
 // Returns the value that corresponds to (name),
 // Returns "" if name does not exist.
 string BST::get_value(string name) const
  {
-    return ""; //TODO: Change this to implement the get_value() method
+    return search(*&this->root, name);
  }
 
 
 // Returns number of constant value pairs
 int BST::num_constants() const
 {
-    return -1; //TODO: Change this to implement the num_constants() method
+    return count_nodes(*&this->root);
 }
 
 // Deletes the trees in tree1
