@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+
 struct Node
 {
     Node *left;
@@ -24,5 +25,5 @@ private:
     Node *root;
 };
 
-    
+
 
