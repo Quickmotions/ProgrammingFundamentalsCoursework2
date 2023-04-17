@@ -7,7 +7,6 @@ string search_helper(Node *root, const string& search_name);
 Node* copy_helper(Node *node);
 void destructor_helper(Node *root);
 
-
 //A helper function to allow recursive calls
 //You can add helper functions like this for the other methods,
 //to recursively move through the tree
@@ -123,7 +122,6 @@ string BST::to_string() const
     return ret;
 }
 
-
 // Inserts the constant (name) and its corresponding value
 // (value) into the correct position in the tree.
 void BST::insert_constant(string name, string value)
@@ -137,7 +135,6 @@ string BST::get_value(string name) const
  {
     return search_helper(*&this->root, name);
  }
-
 
 // Returns number of constant value pairs
 int BST::num_constants() const
