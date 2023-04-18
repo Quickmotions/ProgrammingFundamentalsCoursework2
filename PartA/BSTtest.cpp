@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include "BST.h"
-#include "BST.cpp"
 
 using namespace std;
 
@@ -14,7 +13,7 @@ int main()
 	tree.insert_constant("PI", "3.142"); //Insert a single constant-value pair
 	if(tree.to_string() == "PI=3.142")
 	{
-		cout << "Passed Test 1a: Insert single constant-value pair" << endl;	
+		cout << "Passed Test 1a: Insert single constant-value pair" << endl;
 	}
 	else
 	{
@@ -42,7 +41,6 @@ int main()
 	string value2 =  tree.get_value("PI");
 	if(value1 == "100" && value2 == "3.142")
 	{
-
 		cout << "Passed Test 2: get_value from key" << endl;
 	}
 	else
