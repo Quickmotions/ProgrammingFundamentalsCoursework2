@@ -45,6 +45,9 @@ void insert_helper(Node *&root, const string& name, const string& value) {
 
 string search_helper(Node *root, const string& search_name){
     string output;
+    if (root == nullptr) {
+        return "";
+    }
     if(root->name == search_name) {
         output = root->value;
     }
