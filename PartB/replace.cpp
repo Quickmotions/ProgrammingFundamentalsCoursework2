@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 #include "BST.h"
 
 using namespace std;
@@ -21,17 +22,26 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    BST tree;
+    vector<string> strVec;
+
     string line;
     while (getline(file, line)) {
+
         istringstream line_stream(line);
         string token;
 
         while (line_stream >> token) {
             if (token == "#define") {
-                cout << "Found #define token!" << endl;
+                // collect the next two tokens after #define token for defined name and value
+                line_stream >> token;
+                string name = token;
+                line_stream >> token;
+                string value = token;
+                tree.insert_constant(name, value);
             }
         }
     }
-
+    cout << tree.to_string() << endl;
     return 0;
 }
