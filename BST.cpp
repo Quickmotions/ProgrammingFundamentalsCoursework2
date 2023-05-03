@@ -1,7 +1,9 @@
+// Author: Fergus Haak
+// BST main file, binary search tree related methods
+
 #include <string>
 #include "BST.h"
 using namespace std;
-
 
 string to_string_helper(Node *root);
 void insert_helper(Node *&root, const string& name, const string& value);
@@ -9,9 +11,7 @@ string search_helper(Node *root, const string& search_name);
 Node* copy_helper(Node *node);
 void destructor_helper(Node *root);
 
-//A helper function to allow recursive calls
-//You can add helper functions like this for the other methods,
-//to recursively move through the tree
+// BST To String Helper Method used only by to_string method.
 string to_string_helper(Node *root)
 {
     if(root == nullptr)
@@ -26,6 +26,7 @@ string to_string_helper(Node *root)
     }
 }
 
+// BST Insert Helper Method used only by insert method.
 void insert_helper(Node *&root, const string& name, const string& value) {
     if (root == nullptr) {
         root = new Node;
@@ -43,6 +44,7 @@ void insert_helper(Node *&root, const string& name, const string& value) {
     }
 }
 
+// BST Get Helper Method used only by get method.
 string search_helper(Node *root, const string& search_name){
     string output;
     if (root == nullptr) {
@@ -60,6 +62,7 @@ string search_helper(Node *root, const string& search_name){
     return output;
 }
 
+// BST Copy Helper Method used only by num_constants method.
 Node* copy_helper(Node *node){
     if (node == nullptr){
         return nullptr;
@@ -75,6 +78,7 @@ Node* copy_helper(Node *node){
     return copy;
 }
 
+// BST Num Constants Helper Method used only by Num constants method.
 int num_helper(Node *root){
     int count = 0;
     if (root != nullptr){
@@ -89,6 +93,7 @@ int num_helper(Node *root){
     return count;
 }
 
+// BST Destructor Helper Method used only by destructor
 void destructor_helper(Node *root){
     if(root == nullptr){
         return;
@@ -99,13 +104,15 @@ void destructor_helper(Node *root){
     delete root;
 }
 
+// creates a new binary search tree with no data inside
 BST::BST()
 {
     this->root = nullptr;
 }
 
-// Creates a binary search_helper tree by copying all the constant value pairs
-// from the existing binary search_helper tree.
+// Copy Constructor for BST class.
+// Parameters:
+// other: BST object to be copied
 BST::BST(const BST &other)
 {
     root = copy_helper(other.root);
@@ -117,6 +124,7 @@ BST::~BST()
     destructor_helper(root);
 }
 
+// returns the BST names and values as a string
 string BST::to_string() const
 {
     string ret = to_string_helper(this->root);
@@ -127,26 +135,32 @@ string BST::to_string() const
     return ret;
 }
 
-// Inserts the constant (name) and its corresponding value
-// (value) into the correct position in the tree.
+// inserts new value and name into tree
+// Parameters:
+// name: name of item to be added
+// value: value of item to be added
 void BST::insert_constant(string name, string value)
 {
     insert_helper(*&this->root, name, value);
 }
 
-// Returns the value that corresponds to (name),
-// Returns "" if name does not exist.
+// returns the value of a name located inside the tree
+// Parameters:
+// name: name of value to collect
 string BST::get_value(string name) const
  {
     return search_helper(*&this->root, name);
  }
 
-// Returns number of constant value pairs
+// returns number of items stored in tree
 int BST::num_constants() const
 {
     return num_helper(*&this->root);
 }
 
+// Copy Assignment Operator for BST class.
+// Parameters:
+// rhs: target for assignment
 BST& BST::operator=(const BST &rhs)
 {
     destructor_helper(root);

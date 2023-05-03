@@ -1,3 +1,6 @@
+// Author: Fergus Haak
+// BST header files, defines binary search tree related methods
+
 #pragma once
 #include <string>
 
@@ -24,6 +27,3 @@ public:
 private:
     Node *root;
 };
-
-
-
